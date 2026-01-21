@@ -4816,18 +4816,18 @@ class FindObjectPopup : SetIDPopup {
 [[link(android)]]
 class FLAlertLayer : cocos2d::CCLayerColor {
     FLAlertLayer() = win 0x51720;
-    ~FLAlertLayer();
+    ~FLAlertLayer() = win 0x51850;
 
-    static FLAlertLayer* create(char const* title, const gd::string& desc, char const* btn);
-    static FLAlertLayer* create(FLAlertLayerProtocol* delegate, char const* title, gd::string desc, char const* btn1, char const* btn2);
+    static FLAlertLayer* create(char const* title, const gd::string& desc, char const* btn) = win inline;
+    static FLAlertLayer* create(FLAlertLayerProtocol* delegate, char const* title, gd::string desc, char const* btn1, char const* btn2) = win inline;
     static FLAlertLayer* create(FLAlertLayerProtocol* delegate, char const* title, gd::string desc, char const* btn1, char const* btn2, float width) = win 0x51900;
     static FLAlertLayer* create(FLAlertLayerProtocol* delegate, char const* title, gd::string desc, char const* btn1, char const* btn2, float width, bool scroll, float height, float textScale) = win 0x519b0, m1 0x3ff45c;
 
     virtual void onEnter() = m1 0x400970;
     virtual bool ccTouchBegan(cocos2d::CCTouch* touch, cocos2d::CCEvent* event) = win 0x52a70;
-    virtual void ccTouchMoved(cocos2d::CCTouch* touch, cocos2d::CCEvent* event);
+    virtual void ccTouchMoved(cocos2d::CCTouch* touch, cocos2d::CCEvent* event) = win 0x52bc0;
     virtual void ccTouchEnded(cocos2d::CCTouch* touch, cocos2d::CCEvent* event) = win 0x52b10, m1 0x4005a0;
-    virtual void ccTouchCancelled(cocos2d::CCTouch* touch, cocos2d::CCEvent* event);
+    virtual void ccTouchCancelled(cocos2d::CCTouch* touch, cocos2d::CCEvent* event) = win 0x52b80;
     virtual void registerWithTouchDispatcher() = win 0x52dd0, m1 0x400938;
     virtual void keyBackClicked() = win 0x528f0, imac 0x49c130, m1 0x400328;
     virtual void keyDown(cocos2d::enumKeyCodes key, double timestamp);
@@ -15742,7 +15742,7 @@ class SecretLayer5 : cocos2d::CCLayer, TextInputDelegate, FLAlertLayerProtocol, 
     void showTextInput() = win 0x3f6bd0, m1 0x3e3b58;
     void unlockUI() = win 0x3f6a10, imac 0x47d8d0, m1 0x3e3e60;
     void updateMessageLabel(gd::string text) = win inline, m1 0x3e19fc;
-    void updateSearchLabel(char const* text);
+    void updateSearchLabel(char const* text) = win 0x3f7570;
 
     int m_threadTag;
     int m_basicMessageIndex;
@@ -16527,16 +16527,16 @@ class SetupCameraEdgePopup : SetupTriggerPopup {
 
     static SetupCameraEdgePopup* create(CameraTriggerGameObject* object, cocos2d::CCArray* objects);
 
-    virtual void determineStartValues() = m1 0x4d453c;
+    virtual void determineStartValues() = win 0x4139d0, m1 0x4d453c;
     virtual void onClose(cocos2d::CCObject* sender) = win 0x413ec0, m1 0x4d4774;
-    virtual void textChanged(CCTextInputNode* node);
+    virtual void textChanged(CCTextInputNode* node) = win 0x413c80;
 
     bool init(CameraTriggerGameObject* object, cocos2d::CCArray* objects) = win 0x412c90, imac 0x4d80a0, m1 0x257f70;
     void onCameraEdge(cocos2d::CCObject* sender) = win 0x413ad0, m1 0x4d43d0;
-    void onTargetIDArrow(cocos2d::CCObject* sender);
+    void onTargetIDArrow(cocos2d::CCObject* sender) = win 0x413c30;
     void onUnlockEdge(cocos2d::CCObject* sender) = win 0x413c00, imac 0x589080, m1 0x4d44c0;
-    void updateTargetID();
-    void updateTextInputLabel();
+    void updateTargetID() = win 0x413df0;
+    void updateTextInputLabel() = win 0x413d70;
 
     CCTextInputNode* m_targetIDInput;
     int m_targetID;
@@ -17410,7 +17410,7 @@ class SetupPulsePopup : SetupTriggerPopup, cocos2d::extension::ColorPickerDelega
     virtual void colorSelectClosed(GJSpecialColorSelect* select, int id) = win 0x43b9f0;
 
     cocos2d::ccColor3B getColorValue() = win inline, imac 0x3af530, m1 0x332b18, ios inline;
-    bool init(EffectGameObject* object, cocos2d::CCArray* objects) = win 0x3a7a80;
+    bool init(EffectGameObject* object, cocos2d::CCArray* objects) = win 0x437700;
     void onCopy(cocos2d::CCObject* sender) = win 0x90e20, m1 0x331be4;
     void onExclusive(cocos2d::CCObject* sender);
     void onGroupMainOnly(cocos2d::CCObject* sender) = win 0x43b6e0;
@@ -17427,8 +17427,8 @@ class SetupPulsePopup : SetupTriggerPopup, cocos2d::extension::ColorPickerDelega
     void sliderChanged(cocos2d::CCObject* sender) = win 0x43bb90, m1 0x330df0;
     void updateColorLabels();
     void updateColorValue() = win inline;
-    void updateCopyColor() = m1 0x332aa4;
-    void updateCopyColorTextInputLabel();
+    void updateCopyColor() = win 0x43ce60, m1 0x332aa4;
+    void updateCopyColorTextInputLabel() = win 0x43d010;
     void updateFadeInLabel(bool decimals);
     void updateFadeInTime() = m1 0x332b2c;
     void updateFadeOutLabel(bool decimals);
@@ -18096,7 +18096,7 @@ class SetupTriggerPopup : FLAlertLayer, TextInputDelegate, ConfigureValuePopupDe
     void updateCustomToggleTrigger(int tag, bool toggled) = win inline, imac 0x23b190, m1 0x1e3644;
     void updateEaseLabel() = m1 0x1e65dc;
     void updateEaseRateLabel();
-    void updateEditorLabel() = m1 0x1e0464;
+    void updateEditorLabel() = win 0x475500, m1 0x1e0464;
     void updateInputNodeLabel(int property, gd::string text) = win 0x47c0a0;
     void updateLabel(int property, gd::string text) = win inline, imac 0x23b1d0, m1 0x1e3680, ios inline;
     void updateMultiTriggerBtn() = win 0x475760, m1 0x1e02a8;
